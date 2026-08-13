@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Places to Visit</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            transition: 0.3s;
+        }
+        /* Dark Mode */
+        .dark-mode {
+            background: #121212;
+            color: white;
+        }
+        .dark-mode .navbar {
+            background: black;
+        }
+        .dark-mode .place-card {
+            background: #1f1f1f;
+            color: white;
+        }
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #004aad;
+            padding: 15px 40px;
+        }
+        .logo {
+            color: white;
+        }
+        .navbar ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover,
+        .active {
+            color: #ffdd55;
+        }
+        #darkBtn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ffce00;
+            cursor: pointer;
+        }
+        /* Title */
+        .title {
+            text-align: center;
+            color: #004aad;
+            padding: 20px;
+        }
+        /* Search */
+        .search-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+        /* Cards */
+        .places-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+        }
+        .place-card {
+            width: 300px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px #cccccc;
+            transition: 0.3s;
+        }
+        .place-card:hover {
+            transform: translateY(-8px);
+        }
+        .place-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .place-card h3 {
+            color: #004aad;
+        }
+        .view-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #004aad;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2 class="logo">Explore Sydney</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="places.html" class="active">
+                    Places to Visit
+                </a>
+            </li>
+            <li><a href="food.html">Food & Culture</a></li>
+        </ul>
+        <button id="darkBtn">Dark Mode</button>
+    </nav>
+    <!-- Title -->
+    <h1 class="title">Top Places to Visit in Sydney</h1>
+    <!-- Search Box -->
+    <div class="search-box">
+        <input type="text"
+               id="searchBox"
+               placeholder="Search Places...">
+    </div>
+    <!-- Dynamic Cards -->
+    <div class="places-container" id="placesContainer">
+    </div>
+    <script>
+        // Dark Mode
+        const darkBtn = document.getElementById("darkBtn");
+        if(localStorage.getItem("theme") === "dark"){
+            document.body.classList.add("dark-mode");
+        }
+        darkBtn.addEventListener("click", function(){
+            document.body.classList.toggle("dark-mode");
+            if(document.body.classList.contains("dark-mode")){
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+        });
+        // Array of Places
+        const places = [
+            {
+                name: "Sydney Opera House",
+                image:
+                "https://i.pinimg.com/1200x/a2/14/7c/a2147ce2984dc2f937c992d32dab5ca8.jpg",
+                description:
+                "Famous building with unique architecture.",
+                link: "opera-house.html"
+            },
+            {
+                name: "Sydney Harbour Bridge",
+                image:
+                "https://i.pinimg.com/1200x/98/6a/e7/986ae71ff8da39a03f4de77513aeed8c.jpg",
+                description:
+                "Iconic bridge with amazing harbour views.",
+                link: "harbour-bridge.html"
+            },
+            {
+                name: "Bondi Beach",
+                image:
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+                description:
+                "Popular beach known for surfing and cafes.",
+                link: "bondi-beach.html"
+            }
+        ];
+        // Display Places
+        const placesContainer =
+        document.getElementById("placesContainer");
+        function displayPlaces(data){
+            placesContainer.innerHTML = "";
+            data.forEach(function(place){
+                placesContainer.innerHTML += `
+                <div class="place-card">
+                    <img src="${place.image}"
+                         alt="${place.name}">
+                    <h3>${place.name}</h3>
+                    <p>${place.description}</p>
+                    <a href="${place.link}"
+                       class="view-btn">
+                       Learn More
+                    </a>
+                </div>
+                `;
+            });
+        }
+        // Initial Display
+        displayPlaces(places);
+        // Search Filter
+        const searchBox =
+        document.getElementById("searchBox");
+        searchBox.addEventListener("keyup", () => {
+            let value =
+            searchBox.value.toLowerCase();
+            let filteredPlaces =
+            places.filter((place) => {
+                return place.name
+                .toLowerCase()
+                .includes(value);
+            });
+            displayPlaces(filteredPlaces);
+        });
+        // Loop Example
+        for(let place of places){
+            console.log(place.name);
+        }
+        // JSON Handling
+        let jsonData =
+        JSON.stringify(places);
+        console.log(jsonData);
+        let objectData =
+        JSON.parse(jsonData);
+        console.log(objectData);
+    </script>
+</body>
+</html>

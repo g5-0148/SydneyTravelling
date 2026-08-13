@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sydney Opera House</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right,
+            #e3f2fd, #ffffff);
+
+            transition: 0.3s;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #121212;
+            color: white;
+        }
+
+        .dark-mode .navbar {
+            background: black;
+        }
+
+        .dark-mode .content {
+            background: #1f1f1f;
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0077c2;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            color: white;
+        }
+
+        .navbar ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover,
+        .active {
+            color: #ffdd55;
+        }
+
+        #darkBtn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ffce00;
+            cursor: pointer;
+        }
+
+        /* Content */
+        .content {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+            text-align: center;
+        }
+
+        .content img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .content h1 {
+            color: #0077c2;
+            margin-top: 20px;
+        }
+
+        .content p {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #0077c2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background: #005a8c;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <h2 class="logo">Explore Sydney</h2>
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="places.html">Places to Visit</a></li>
+
+            <li><a href="food.html">Food & Culture</a></li>
+
+        </ul>
+
+        <button id="darkBtn">Dark Mode</button>
+
+    </nav>
+
+
+    <!-- Content -->
+    <div class="content">
+
+        <img src="https://i.pinimg.com/1200x/a2/14/7c/a2147ce2984dc2f937c992d32dab5ca8.jpg"
+             alt="Opera House">
+
+        <h1>Sydney Opera House</h1>
+
+        <p>
+            The Sydney Opera House is one of the
+            most iconic buildings in the world.
+            It is famous for its sail-like design
+            and beautiful harbour location.
+        </p>
+
+        <p>
+            Thousands of performances are held here
+            every year including music concerts,
+            theatre shows, and opera performances.
+        </p>
+
+        <button id="infoBtn" class="btn">
+            Show Fun Fact
+        </button>
+
+        <p id="factText"></p>
+
+        <a href="places.html" class="btn">
+            Back to Places
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Dark Mode
+        const darkBtn =
+        document.getElementById("darkBtn");
+
+
+        if(localStorage.getItem("theme") === "dark"){
+
+            document.body.classList.add("dark-mode");
+        }
+
+
+        darkBtn.addEventListener("click", function(){
+
+            document.body.classList.toggle("dark-mode");
+
+            if(document.body.classList.contains("dark-mode")){
+
+                localStorage.setItem("theme", "dark");
+
+            } else {
+
+                localStorage.setItem("theme", "light");
+            }
+
+        });
+
+
+        // Event Handling
+        const infoBtn =
+        document.getElementById("infoBtn");
+
+        const factText =
+        document.getElementById("factText");
+
+
+        infoBtn.addEventListener("click", function(){
+
+            factText.innerHTML =
+            "Fun Fact: The Opera House is a UNESCO World Heritage Site.";
+
+        });
+
+
+        // Object Example
+        const operaHouse = {
+
+            name: "Sydney Opera House",
+
+            country: "Australia",
+
+            year: 1973
+        };
+
+
+        // Destructuring
+        const {name, country, year} =
+        operaHouse;
+
+        console.log(name);
+        console.log(country);
+        console.log(year);
+
+
+        // JSON Example
+        let jsonData =
+        JSON.stringify(operaHouse);
+
+        console.log(jsonData);
+
+
+        // Loop Example
+        for(let key in operaHouse){
+
+            console.log(key + ": " + operaHouse[key]);
+        }
+
+
+        // Timer Example
+        setTimeout(function(){
+
+            console.log("Enjoy your visit!");
+
+        }, 2000);
+
+    </script>
+
+</body>
+</html>

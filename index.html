@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Sydney</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            transition: 0.3s;
+        }
+        /* Dark Mode */
+        .dark-mode {
+            background: #121212;
+            color: white;
+
+        }
+        .dark-mode .navbar {
+            background: black;
+        }
+        .dark-mode .hero-text {
+            background: rgba(255,255,255,0.1);
+        }
+        .dark-mode .about {
+            background: #1f1f1f;
+            color: white;
+        }
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #004aad;
+            padding: 15px 40px;
+        }
+        .logo {
+            color: white;
+            margin: 0;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .navbar ul li a:hover,
+        .active {
+            color: #ffdd55;
+        }
+        #darkBtn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ffce00;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        .hero {
+            background:
+            url('https://images.unsplash.com/photo-1506084868230-bb9d95c24759')
+            no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-text {
+            color: white;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+        /* Button */
+        .explore-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ffce00;
+            color: black;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .explore-button:hover {
+            background: #ffa600;
+        }
+        /* About Section */
+        .about {
+            padding: 40px;
+            text-align: center;
+        }
+        .external-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #004aad;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .external-link:hover {
+            text-decoration: underline;
+        }
+        #clock {
+            color: #ffdd55;
+        }
+        #quote {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2 class="logo">Explore Sydney</h2>
+        <ul>
+            <li>
+                <a href="index.html" class="active">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="places.html">
+                    Places to Visit
+                </a>
+            </li>
+            <li>
+                <a href="food.html">
+                    Food & Culture
+                </a>
+            </li>
+        </ul>
+        <button id="darkBtn">
+            Dark Mode
+        </button>
+    </nav>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Welcome to Sydney</h1>
+            <p>The Harbour City of Australia</p>
+            <!-- Clock -->
+            <h2 id="clock"></h2>
+            <!-- Random Quote -->
+            <p id="quote"></p>
+            <a href="places.html"
+               class="explore-button">
+               Explore Places
+            </a>
+        </div>
+    </header>
+    <!-- About Section -->
+    <section class="about">
+        <h2>Why Visit Sydney?</h2>
+        <p>
+            Sydney is one of the most beautiful
+            and vibrant cities in the world.
+
+            From the Opera House to beaches and
+            cultural hotspots, Sydney offers
+            unforgettable experiences.
+        </p>
+        <a href="https://en.wikipedia.org/wiki/Sydney"
+           target="_blank"
+           class="external-link">
+           Read About Sydney →
+        </a>
+    </section>
+    <script>
+        // Welcome Alert
+        window.onload = function(){
+            alert("Welcome to Sydney Tourism Website!");
+        };
+        // Dark Mode
+        const darkBtn =
+        document.getElementById("darkBtn");
+        if(localStorage.getItem("theme") === "dark"){
+            document.body.classList.add("dark-mode");
+        }
+        darkBtn.addEventListener("click", function(){
+            document.body.classList.toggle("dark-mode");
+            if(document.body.classList.contains("dark-mode")){
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+        });
+        // Live Clock
+        function updateClock(){
+            const now = new Date();
+            document.getElementById("clock").innerHTML =
+            now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        // Quotes Array
+        const quotes = [
+            "Travel is the best education.",
+            "Sydney welcomes you!",
+            "Explore the beauty of Australia.",
+            "Adventure begins here."
+        ];
+        // Random Quote Function
+        function showQuote(){
+            let random =
+            Math.floor(Math.random() * quotes.length);
+            document.getElementById("quote").innerHTML =
+            quotes[random];
+        }
+        showQuote();
+        // Local Storage
+        localStorage.setItem(
+            "website",
+            "Sydney Tourism"
+        );
+        console.log(
+            localStorage.getItem("website")
+        );
+        // Object Example
+        const city = {
+            name: "Sydney",
+            country: "Australia",
+            famousFor: "Opera House"
+        };
+        // Destructuring
+        const {name, country, famousFor} = city;
+        console.log(name);
+        console.log(country);
+        console.log(famousFor);
+        // JSON Example
+        let jsonData =
+        JSON.stringify(city);
+        console.log(jsonData);
+        // Parse JSON
+        let objectData =
+        JSON.parse(jsonData);
+        console.log(objectData);
+        // Arrow Function
+        const welcomeMessage = () => {
+            console.log("Enjoy your Sydney tour!");
+        };
+        welcomeMessage();
+        // Loop Example
+        const places = [
+            "Opera House",
+            "Bondi Beach",
+            "Harbour Bridge"
+        ];
+        for(let place of places){
+            console.log(place);
+        }
+    </script>
+</body>
+</html>

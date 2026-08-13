@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sydney Harbour Bridge</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+            font-family: Arial, sans-serif;
+
+            background:
+            linear-gradient(to bottom right,
+            #e3f2fd, #ffffff);
+
+            transition: 0.3s;
+
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+
+            background: #121212;
+            color: white;
+
+        }
+
+        .dark-mode .navbar {
+
+            background: black;
+
+        }
+
+        .dark-mode .content {
+
+            background: #1f1f1f;
+            color: white;
+
+        }
+
+        /* Navbar */
+        .navbar {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: #0077c2;
+
+            padding: 15px 40px;
+
+        }
+
+        .logo {
+
+            color: white;
+
+        }
+
+        .navbar ul {
+
+            display: flex;
+            gap: 20px;
+            list-style: none;
+
+        }
+
+        .navbar ul li a {
+
+            color: white;
+            text-decoration: none;
+
+        }
+
+        .navbar ul li a:hover {
+
+            color: #ffdd55;
+
+        }
+
+        #darkBtn {
+
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+
+            background: #ffce00;
+
+            cursor: pointer;
+
+        }
+
+        /* Content */
+        .content {
+
+            max-width: 900px;
+
+            margin: 40px auto;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+            0 0 20px rgba(0,0,0,0.1);
+
+            text-align: center;
+
+        }
+
+        .content img {
+
+            width: 100%;
+
+            max-height: 400px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+        }
+
+        .content h1 {
+
+            color: #0077c2;
+
+            margin-top: 20px;
+
+        }
+
+        .content p {
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 12px 25px;
+
+            background: #0077c2;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+        .btn:hover {
+
+            background: #005a8c;
+
+        }
+
+        #factText {
+
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #0077c2;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <h2 class="logo">
+            Explore Sydney
+        </h2>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="places.html">
+                    Places to Visit
+                </a>
+            </li>
+
+            <li>
+                <a href="food.html">
+                    Food & Culture
+                </a>
+            </li>
+
+        </ul>
+
+        <button id="darkBtn">
+            Dark Mode
+        </button>
+
+    </nav>
+
+
+    <!-- Content -->
+    <div class="content">
+
+        <img src="https://i.pinimg.com/1200x/98/6a/e7/986ae71ff8da39a03f4de77513aeed8c.jpg"
+             alt="Harbour Bridge">
+
+        <h1>Sydney Harbour Bridge</h1>
+
+        <p>
+
+            The Sydney Harbour Bridge is one
+            of Australia's most famous landmarks.
+
+            It connects the Sydney CBD with
+            the North Shore.
+
+        </p>
+
+        <p>
+
+            Visitors can walk, cycle,
+            or climb the bridge and enjoy
+            beautiful views of Sydney Harbour.
+
+        </p>
+
+
+        <!-- Fact Button -->
+        <button id="factBtn"
+                class="btn">
+
+            Show Bridge Fact
+
+        </button>
+
+        <p id="factText"></p>
+
+
+        <!-- Back Button -->
+        <a href="places.html"
+           class="btn">
+
+           Back to Places
+
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Dark Mode
+        const darkBtn =
+        document.getElementById("darkBtn");
+
+
+        if(localStorage.getItem("theme")
+           === "dark"){
+
+            document.body.classList
+            .add("dark-mode");
+
+        }
+
+
+        darkBtn.addEventListener(
+            "click",
+
+            function(){
+
+                document.body.classList
+                .toggle("dark-mode");
+
+                if(document.body.classList
+                   .contains("dark-mode")){
+
+                    localStorage.setItem(
+                        "theme",
+                        "dark"
+                    );
+
+                }
+
+                else {
+
+                    localStorage.setItem(
+                        "theme",
+                        "light"
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        // Facts Array
+        const facts = [
+
+            "The Harbour Bridge opened in 1932.",
+
+            "More than 6 million rivets were used to build it.",
+
+            "It is one of the largest steel arch bridges in the world.",
+
+            "The bridge is nicknamed 'The Coathanger' because of its shape.",
+
+            "The top of the bridge stands 134 meters above the harbour."
+
+        ];
+
+
+        // Fact Button
+        const factBtn =
+        document.getElementById("factBtn");
+
+        const factText =
+        document.getElementById("factText");
+
+
+        factBtn.addEventListener(
+
+            "click",
+
+            function(){
+
+                let random = Math.floor(
+
+                    Math.random() * facts.length
+
+                );
+
+                factText.innerHTML =
+                facts[random];
+
+            }
+
+        );
+
+
+        // Arrow Function
+        const welcome = () => {
+
+            console.log(
+                "Welcome to Harbour Bridge!"
+            );
+
+        };
+
+        welcome();
+
+
+        // Object Example
+        const bridge = {
+
+            name: "Harbour Bridge",
+
+            city: "Sydney",
+
+            country: "Australia"
+
+        };
+
+
+        // Destructuring
+        const {name, city, country} =
+        bridge;
+
+        console.log(name);
+        console.log(city);
+        console.log(country);
+
+
+        // JSON Example
+        let jsonData =
+        JSON.stringify(bridge);
+
+        console.log(jsonData);
+
+
+        // Parse JSON
+        let objectData =
+        JSON.parse(jsonData);
+
+        console.log(objectData);
+
+
+        // Array Example
+        const activities = [
+
+            "Bridge Climb",
+
+            "Photography",
+
+            "Walking"
+
+        ];
+
+
+        // forEach Loop
+        activities.forEach(function(activity){
+
+            console.log(activity);
+
+        });
+
+
+        // map Example
+        let upperActivities =
+        activities.map(function(activity){
+
+            return activity.toUpperCase();
+
+        });
+
+        console.log(upperActivities);
+
+
+        // setTimeout Example
+        setTimeout(function(){
+
+            console.log(
+                "Enjoy the Harbour Bridge!"
+            );
+
+        }, 2000);
+
+    </script>
+
+</body>
+</html>
